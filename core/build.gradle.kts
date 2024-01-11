@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    // optional: maven plugin
     id("com.github.raedev.maven")
 }
 
@@ -10,8 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 26
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = 23
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -31,20 +29,24 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
-// optional: maven plugin
-mavenPublishing {
-    name = "androidx.kylin:core:1.0.0"
-    pomUrl = "https://github.com/raedev/Kylin"
-    pomName = "rae"
-    pomEmail = "raedev@qq.com"
-}
 
 dependencies {
     compileOnly("androidx.core:core-ktx:1.12.0")
     compileOnly("androidx.appcompat:appcompat:1.6.1")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("org.robolectric:robolectric:4.9.2")
+}
+
+mavenPublishing {
+    name = "androidx.kylin:core:1.0.0"
+    pomUrl = "https://github.com/raedev/Kylin"
+    pomName = "rae"
+    pomEmail = "raedev@qq.com"
 }

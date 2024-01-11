@@ -1,17 +1,17 @@
 package androidx.kylin.core.app
 
+import android.app.Application
 import androidx.core.content.FileProvider
-import androidx.kylin.core.internal.GlobeApplication
 
 /**
- * this file provider only do one thing that provide the application context.
+ * 文件提供者，实际用来获取全局的ApplicationContext
  * @author rae
  * @copyright https://github.com/raedev
  */
-class KylinCoreFileProvider : FileProvider() {
+open class KylinCoreFileProvider : FileProvider() {
 
     override fun onCreate(): Boolean {
-        GlobeApplication.init(context!!.applicationContext)
+        KylinGlobe.application = context!!.applicationContext as Application
         return true
     }
 }
