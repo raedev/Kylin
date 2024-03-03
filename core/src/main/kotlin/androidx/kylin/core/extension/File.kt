@@ -2,9 +2,9 @@ package androidx.kylin.core.extension
 
 import java.io.File
 
-inline fun File?.isExist() = this?.exists() ?: false
+fun File?.isExist(): Boolean = this?.exists() ?: false
 
-inline fun File?.isNotExist() = !isExist()
+fun File?.isNotExist(): Boolean = !isExist()
 
 
 

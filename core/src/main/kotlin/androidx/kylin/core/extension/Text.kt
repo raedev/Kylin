@@ -5,14 +5,20 @@
  */
 package androidx.kylin.core.extension
 
+import androidx.kylin.core.util.JsonUtils
 import java.io.File
 
-/** whether the string is not null or empty. */
-inline fun String?.isNotNull(): Boolean = !this.isNullOrEmpty()
+/** 字符串是否不为空 */
+fun String?.isNotNull(): Boolean = !this.isNullOrEmpty()
 
-/** when the string is empty and then return the default value. */
-inline fun String?.nullOrEmptyDefault(default: String): String =
-    if (this.isNullOrEmpty()) default else this
+/** 当字符串为空时返回默认值 */
+fun String?.nullOrEmptyDefault(default: String): String =
+    if (this.isNullOrBlank()) default else this
 
-/** covert the string to file. */
-inline fun String.toFile(): File = File(this)
+/** 从字符串实例化成文件 */
+fun String.toFile(): File = File(this)
+
+/** JSON转对象 */
+fun <T : Any> String?.toBean(clazz: Class<T>): T? {
+    return this?.let { JsonUtils.fromJson(it, clazz) }
+}

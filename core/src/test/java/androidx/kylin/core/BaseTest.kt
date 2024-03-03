@@ -1,7 +1,12 @@
 package androidx.kylin.core
 
+import androidx.kylin.core.app.KylinGlobe
+import androidx.kylin.core.extension.logger
+import androidx.kylin.core.util.log.KotlinLogger
+import androidx.kylin.core.util.log.LoggerFactory
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLog
 
@@ -12,4 +17,12 @@ import org.robolectric.shadows.ShadowLog
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE, shadows = [ShadowLog::class])
-abstract class BaseTest
+abstract class BaseTest {
+
+    init {
+        // 初始化
+        KylinGlobe.application = RuntimeEnvironment.getApplication()
+        LoggerFactory.name = "KylinUnitTest"
+        LoggerFactory.appendLogger(logger()) { KotlinLogger(it.name) }
+    }
+}

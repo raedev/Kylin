@@ -40,8 +40,13 @@ android {
 dependencies {
     compileOnly("androidx.core:core-ktx:1.12.0")
     compileOnly("androidx.appcompat:appcompat:1.6.1")
+    compileOnly("androidx.appcompat:appcompat:1.6.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.9.2")
+    testImplementation("com.blankj:utilcodex:1.31.1")
+    testImplementation("com.google.code.gson:gson:2.10.1")
+    // 可选：GSON
+    compileOnly("com.google.code.gson:gson:2.10.1")
 }
 
 mavenPublishing {

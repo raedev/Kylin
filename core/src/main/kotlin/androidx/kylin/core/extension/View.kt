@@ -3,44 +3,37 @@
  * @author rae
  * @copyright https://github.com/raedev
  */
-@file:Suppress("NOTHING_TO_INLINE")
 
 package androidx.kylin.core.extension
 
 import android.view.View
+import androidx.kylin.core.util.ViewUtils
 
-/** Whether the view is gone */
-inline fun View?.isGone(): Boolean = this?.visibility == View.GONE
+/** View是否隐藏 */
+fun View?.isGone(): Boolean = this?.visibility == View.GONE
 
-/** Whether the view is isVisible */
-inline fun View?.isVisible(): Boolean = this?.visibility == View.VISIBLE
+/** View是否可见 */
+fun View?.isVisible(): Boolean = this?.visibility == View.VISIBLE
 
-/** Whether the view is isInvisible */
-inline fun View?.isInvisible(): Boolean = this?.visibility == View.INVISIBLE
+/** View是否无形 */
+fun View?.isInvisible(): Boolean = this?.visibility == View.INVISIBLE
 
-/** Auto set the visibility When the view is invisible */
-inline fun View?.ifInvisible(visible: Boolean = false) {
-    this?.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+/** 隐藏View */
+fun View?.gone() = visible(false)
+
+/** 显示或隐藏View */
+fun View?.visible(visible: Boolean = false) {
+    this?.let { ViewUtils.setVisible(it, visible) }
 }
 
-/** Auto set the visibility When the view is visible */
-inline fun View?.ifVisible(visible: Boolean = true) {
-    this?.visibility = if (visible) View.VISIBLE else View.GONE
+/** 显示或无形View */
+fun View?.invisible(visible: Boolean = false) {
+    this?.let { ViewUtils.setInVisible(it, visible) }
 }
 
-/** Show the view */
-inline fun View?.show() = ifVisible()
-
-/** Hide the view */
-inline fun View?.hide() = ifVisible(false)
-
-/** Show the view */
-inline fun View?.visible() = ifVisible(true)
-
-/** Hide the view */
-inline fun View?.gone() = ifVisible(false)
-
-/** Toggle the view */
-inline fun View?.toggle() = ifVisible(!isVisible())
+/** 切换显示或隐藏 */
+fun View?.toggle() {
+    if (isGone() || isInvisible()) visible() else gone()
+}
 
 

@@ -4,7 +4,7 @@ package androidx.kylin.core.util
 
 import android.os.Build
 import android.text.Html
-import android.util.Base64
+import androidx.kylin.core.util.security.Base64Utils
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.Charset
@@ -52,7 +52,7 @@ object EncodeUtils {
      * @param input 文本
      */
     fun base64Encode(input: String): ByteArray? {
-        return base64Encode(input.toByteArray())
+        return Base64Utils.encode(input)?.toByteArray()
     }
 
     /**
@@ -60,7 +60,7 @@ object EncodeUtils {
      * @param input Byte 数组
      */
     fun base64Encode(input: ByteArray?): ByteArray? {
-        return if (input?.isEmpty() == true) null else Base64.encode(input, Base64.NO_WRAP)
+        return Base64Utils.encode(input)
     }
 
     /**
@@ -69,7 +69,7 @@ object EncodeUtils {
      * @param input byte 数据
      */
     fun base64Encode2String(input: String?): String? {
-        return input?.let { base64Encode2String(it.toByteArray()) }
+        return input?.let { Base64Utils.encode(it) }
     }
 
     /**
@@ -78,7 +78,7 @@ object EncodeUtils {
      * @param input byte 数据
      */
     fun base64Encode2String(input: ByteArray?): String? {
-        return if (input?.isEmpty() == true) null else Base64.encodeToString(input, Base64.NO_WRAP)
+        return Base64Utils.encode(input)?.toString(Charsets.UTF_8)
     }
 
     /**
@@ -86,7 +86,7 @@ object EncodeUtils {
      * @param input 文本
      */
     fun base64Decode(input: String?): ByteArray? {
-        return if (input.isNullOrBlank()) null else Base64.decode(input, Base64.NO_WRAP)
+        return Base64Utils.decode(input)?.toByteArray()
     }
 
     /**
@@ -94,7 +94,7 @@ object EncodeUtils {
      * @param input 文本
      */
     fun base64Decode(input: ByteArray?): ByteArray? {
-        return if (input?.isEmpty() == true) null else Base64.decode(input, Base64.NO_WRAP)
+        return Base64Utils.decode(input)
     }
 
 
@@ -103,7 +103,7 @@ object EncodeUtils {
      * @param input 文本
      */
     fun base64Decode2String(input: String?): String? {
-        return base64Decode(input)?.toString(Charsets.UTF_8)
+        return Base64Utils.decode(input)
     }
 
     /**
@@ -141,6 +141,7 @@ object EncodeUtils {
      * HTML解码
      * @param input 文本
      */
+    @Suppress("DEPRECATION")
     fun htmlDecode(input: String?): CharSequence? {
         if (input.isNullOrBlank()) return null
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
