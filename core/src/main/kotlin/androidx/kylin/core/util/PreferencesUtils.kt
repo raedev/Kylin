@@ -17,12 +17,6 @@ object PreferencesUtils {
     /** 默认的偏好提供者 */
     var provider: SharedPreferencesWrapper = makeDefault()
 
-    private fun makeDefault(): SharedPreferencesWrapper {
-        val name = app().packageName.replace(".", "_")
-        val sharedPreferences = app().getSharedPreferences(name, Context.MODE_PRIVATE)
-        return SharedPreferencesWrapper(sharedPreferences)
-    }
-
     /** 根据键值对保存 */
     fun put(vararg pairs: Pair<String, Any?>) = provider.putAll(*pairs)
 
@@ -34,16 +28,6 @@ object PreferencesUtils {
 
     /** 移除键 */
     fun remove(key: String) = provider.edit { remove(key) }
-
-    /** 清除所有 */
-    fun clear() = provider.edit { clear() }
-
-    /** 清除满足过滤器的键 */
-    fun clear(filter: (key: String) -> Boolean) = provider.edit {
-        provider.all.keys.filter(filter).forEach {
-            remove(it)
-        }
-    }
 
     /** 获取所有 */
     fun all(): MutableMap<String, *> = provider.all
@@ -70,5 +54,22 @@ object PreferencesUtils {
     fun <T : Any> bean(key: String, clazz: Class<T>): T? = string(key)?.let { it.toBean(clazz) }
 
     fun getValue(key: String): MagicValue = provider.getValue(key)
+
+    /** 清除所有 */
+    fun clear() = provider.edit { clear() }
+
+    /** 清除满足过滤器的键 */
+    fun clear(filter: (key: String) -> Boolean) = provider.edit {
+        provider.all.keys.filter(filter).forEach {
+            remove(it)
+        }
+    }
+
+    /** 获取默认的偏好提供者 */
+    private fun makeDefault(): SharedPreferencesWrapper {
+        val name = app().packageName.replace(".", "_")
+        val sharedPreferences = app().getSharedPreferences(name, Context.MODE_PRIVATE)
+        return SharedPreferencesWrapper(sharedPreferences)
+    }
 
 }

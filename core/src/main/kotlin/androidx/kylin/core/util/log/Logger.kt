@@ -1,6 +1,12 @@
 package androidx.kylin.core.util.log
 
 import android.util.Log
+import androidx.kylin.core.enums.DateFormatter
+import androidx.kylin.core.extension.app
+import androidx.kylin.core.extension.now
+import androidx.kylin.core.util.DateTimeUtils
+import java.io.File
+import kotlin.concurrent.thread
 
 /**
  * 日志记录
@@ -21,6 +27,24 @@ abstract class Logger(
         if (level.level < this.level.level) return
         val tagName = if (tag != name) "$name.$tag" else name
         handleLog(level, tagName, message, throwable)
+    }
+
+    override fun file(level: LogLevel, message: String, tag: String, throwable: Throwable?) {
+        log(level, message, tag, throwable)
+        val threadId = Thread.currentThread().id
+        // 写文件
+        thread {
+            runCatching {
+                val now = now()
+                val date = DateTimeUtils.now(DateFormatter.Date)
+                val dir = app().getExternalFilesDir("log") ?: File(app().filesDir, "log")
+                val file = File(dir, date)
+                val sb = StringBuffer()
+                    .append("$now $threadId ${level.name} $tag: $message\n")
+                    .append(throwable?.stackTraceToString() ?: "")
+                file.appendText(sb.toString())
+            }
+        }
     }
 
     /**

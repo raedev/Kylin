@@ -19,6 +19,8 @@ interface ILog {
     /** 记录日志 */
     fun log(level: LogLevel, message: String, tag: String = name, throwable: Throwable? = null)
 
+    /** 写入日志文件 */
+    fun file(level: LogLevel, message: String, tag: String = name, throwable: Throwable? = null)
 
     /** 调试日志 */
     fun debug(message: String) = log(LogLevel.DEBUG, message)

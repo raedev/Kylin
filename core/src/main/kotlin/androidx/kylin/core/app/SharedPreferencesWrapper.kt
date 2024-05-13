@@ -15,10 +15,10 @@ open class SharedPreferencesWrapper(
     protected val wrapper: SharedPreferences
 ) : SharedPreferences by wrapper {
 
+    protected var map: Map<String, *>? = null
+
     /** 是否发生改变 */
     protected var isChanged: Boolean = false
-
-    protected var map: Map<String, *>? = null
 
     // 设置方法全部统一到这个方法维护
     open fun putAll(vararg pairs: Pair<String, Any?>) = edit {

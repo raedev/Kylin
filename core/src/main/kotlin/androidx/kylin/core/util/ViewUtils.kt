@@ -13,6 +13,7 @@ import androidx.kylin.core.extension.app
  */
 object ViewUtils {
 
+    /** 设置View的可见状态 */
     private fun setVisibility(view: View, visibility: Int) {
         // 当不等于当前状态的时候才去更新
         if (view.visibility != visibility) view.visibility = visibility
@@ -32,5 +33,4 @@ object ViewUtils {
     fun inflate(@LayoutRes id: Int, parent: ViewGroup? = null): View {
         return LayoutInflater.from(app()).inflate(id, parent)
     }
-
 }

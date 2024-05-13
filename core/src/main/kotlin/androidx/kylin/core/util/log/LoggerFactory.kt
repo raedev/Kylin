@@ -41,6 +41,13 @@ object LoggerFactory {
                 it.log(level, message, tag, throwable)
             }
         }
+
+        override fun file(level: LogLevel, message: String, tag: String, throwable: Throwable?) {
+            // 分发日志
+            logs.forEach {
+                it.file(level, message, tag, throwable)
+            }
+        }
     }
 
 
