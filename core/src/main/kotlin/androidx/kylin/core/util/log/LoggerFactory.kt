@@ -52,7 +52,7 @@ object LoggerFactory {
 
 
     /** 获取日志接口 */
-    fun getLogger(name: String?): ILog {
+    fun getLogger(name: String? = null): ILog {
         val key = name ?: this.name
         if (loggerMap.containsKey(key)) return loggerMap[key]!!
         loggerMap[key] = LoggerWrapper(name ?: this.name)

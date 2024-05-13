@@ -1,4 +1,4 @@
-package androidx.kylin.core
+package androidx.kylin.core.lang
 
 import androidx.kylin.core.extension.toBean
 import kotlin.reflect.KClass

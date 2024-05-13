@@ -21,7 +21,7 @@ abstract class BaseTest {
 
     init {
         // 初始化
-        KylinGlobe.application = RuntimeEnvironment.getApplication()
+        KylinGlobe.initialize(RuntimeEnvironment.getApplication())
         LoggerFactory.name = "KylinUnitTest"
         LoggerFactory.appendLogger(logger()) { KotlinLogger(it.name) }
     }

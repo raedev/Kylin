@@ -11,21 +11,21 @@ import androidx.core.view.isVisible
 import androidx.kylin.core.util.ViewUtils
 
 /** View是否隐藏 */
-inline var View.isGone: Boolean
+var View.isGone: Boolean
     get() = visibility == View.GONE
     set(value) {
         visibility = if (value) View.GONE else View.VISIBLE
     }
 
 /** View是否可见 */
-inline var View.isVisible: Boolean
+var View.isVisible: Boolean
     get() = visibility == View.VISIBLE
     set(value) {
         visibility = if (value) View.VISIBLE else View.GONE
     }
 
 /** View是否无形 */
-inline var View.isInvisible: Boolean
+var View.isInvisible: Boolean
     get() = visibility == View.INVISIBLE
     set(value) {
         visibility = if (value) View.INVISIBLE else View.VISIBLE
@@ -53,7 +53,7 @@ fun View?.toggleVisible() {
 }
 
 /** 布局Id转View */
-inline fun Int.inflate(): View {
+fun Int.inflate(): View {
     return ViewUtils.inflate(this)
 }
 

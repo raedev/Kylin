@@ -2,8 +2,8 @@ package androidx.kylin.core.app
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.kylin.core.MagicValue
 import androidx.kylin.core.extension.toJson
+import androidx.kylin.core.lang.MagicValue
 
 /**
  * SharedPreferences 代理装饰类

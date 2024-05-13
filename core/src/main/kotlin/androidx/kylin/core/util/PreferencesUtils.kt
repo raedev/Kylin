@@ -2,10 +2,10 @@ package androidx.kylin.core.util
 
 import android.content.Context
 import androidx.core.content.edit
-import androidx.kylin.core.MagicValue
 import androidx.kylin.core.app.SharedPreferencesWrapper
 import androidx.kylin.core.extension.app
 import androidx.kylin.core.extension.toBean
+import androidx.kylin.core.lang.MagicValue
 
 /**
  * 偏好保存相关

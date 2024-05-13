@@ -1,7 +1,7 @@
 package androidx.kylin.core.util.log
 
 import android.util.Log
-import androidx.kylin.core.enums.DateFormatter
+import androidx.kylin.core.enums.DateFormatStyle
 import androidx.kylin.core.extension.app
 import androidx.kylin.core.extension.now
 import androidx.kylin.core.util.DateTimeUtils
@@ -36,7 +36,7 @@ abstract class Logger(
         thread {
             runCatching {
                 val now = now()
-                val date = DateTimeUtils.now(DateFormatter.Date)
+                val date = DateTimeUtils.now(DateFormatStyle.Date)
                 val dir = app().getExternalFilesDir("log") ?: File(app().filesDir, "log")
                 val file = File(dir, date)
                 val sb = StringBuffer()

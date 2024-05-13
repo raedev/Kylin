@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.github.raedev.maven")
+//    id("com.github.raedev.maven")
 }
 
 android {
@@ -49,9 +49,9 @@ dependencies {
     compileOnly("com.google.code.gson:gson:2.10.1")
 }
 
-mavenPublishing {
-    name = "androidx.kylin:core:1.0.0"
-    pomUrl = "https://github.com/raedev/Kylin"
-    pomName = "rae"
-    pomEmail = "raedev@qq.com"
-}
+//mavenPublishing {
+//    name = "androidx.kylin:core:1.0.0"
+//    pomUrl = "https://github.com/raedev/Kylin"
+//    pomName = "rae"
+//    pomEmail = "raedev@qq.com"
+//}

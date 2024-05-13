@@ -1,7 +1,7 @@
 package androidx.kylin.core.util
 
 import android.annotation.SuppressLint
-import androidx.kylin.core.enums.DateFormatter
+import androidx.kylin.core.enums.DateFormatStyle
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -13,7 +13,7 @@ import java.util.Date
 @SuppressLint("SimpleDateFormat")
 object DateTimeUtils {
 
-    private val INSTANCE = SimpleDateFormat(DateFormatter.DateTime.value)
+    private val INSTANCE = SimpleDateFormat(DateFormatStyle.DateTime.value)
 
     // 格式化给定模式与当前时间或指定时间，并返回格式化后的字符串
     fun format(pattern: String, time: Long = System.currentTimeMillis()): String {
@@ -32,9 +32,9 @@ object DateTimeUtils {
 
 
     /** 格式化日期 */
-    private fun format(formatter: DateFormatter) = format(formatter.value)
+    private fun format(formatter: DateFormatStyle) = format(formatter.value)
 
     /** 格式化当前日志 */
-    fun now(format: DateFormatter = DateFormatter.DateTime): String = format(format)
+    fun now(format: DateFormatStyle = DateFormatStyle.DateTime): String = format(format)
 
 }

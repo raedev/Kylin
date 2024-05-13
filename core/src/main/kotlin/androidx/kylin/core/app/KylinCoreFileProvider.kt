@@ -11,7 +11,10 @@ import androidx.core.content.FileProvider
 open class KylinCoreFileProvider : FileProvider() {
 
     override fun onCreate(): Boolean {
-        KylinGlobe.application = context!!.applicationContext as Application
-        return true
+        if (context?.applicationContext is Application) {
+            KylinGlobe.initialize(context!!.applicationContext as Application)
+            return true
+        }
+        return false
     }
 }
